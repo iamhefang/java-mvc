@@ -1,0 +1,84 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'link.hefang'
+version '1.0.0'
+
+sourceCompatibility = 1.8
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile "javax:javaee-api:8.0"
+    compile "link.hefang:java-helpers:[2.0.0,)"
+    compile "org.json:json:20180130"
+    compile "org.apache.commons:commons-dbcp2:2.5.0"
+    compile "commons-fileupload:commons-fileupload:1.3.3"
+}
+
+javadoc {
+    options {
+        encoding = 'UTF-8'
+        locale = 'zh_CN'
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    classifier = 'javadoc'
+}
+
+task updateVersion {
+//    println "正在更新版本号..."
+//    def ds = File.separatorChar
+//    def mvcFile = new File(projectDir.absolutePath + "${ds}src${ds}main${ds}java${ds}link${ds}hefang${ds}mvc${ds}Mvc.java")
+//    println mvcFile
+//    if (mvcFile.exists()) {
+//        def newVersionLine = "public static final String VERSION = \"${project.version}\";"
+//        def src = mvcFile.readLines().join("\n")
+//                .replaceAll("public static final String VERSION = \".*?\";", newVersionLine)
+//        mvcFile.write(src)
+//        println "当前版本号为:${project.version}"
+//    } else {
+//        println "未找到要更新版本的文件"
+//    }
+}
+
+updateVersion.dependsOn clean
+
+build.dependsOn updateVersion
+
+publishToMavenLocal.dependsOn = [build, javadoc]
+publish.dependsOn = [build, javadoc]
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                username 'admin'
+                password 'wsyy995122...'
+            }
+            url = 'http://registry.hefang.link/repository/hefang/'
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven { url = 'http://registry.hefang.link/repository/maven/' }
+    mavenCentral()
+}
+
