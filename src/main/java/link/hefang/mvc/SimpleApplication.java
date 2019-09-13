@@ -13,22 +13,22 @@ import java.util.Map;
 import static link.hefang.helpers.CollectionHelper.hashMapOf;
 
 public class SimpleApplication implements IApplication {
-    @NotNull
-    @Override
-    public Map<String, Object> onInit(@Nullable ServletConfig config) {
-        return hashMapOf();
-    }
+   @NotNull
+   @Override
+   public Map<String, Object> onInit(@Nullable ServletConfig config) {
+      return hashMapOf();
+   }
 
-    @Nullable
-    @Override
-    public Router onRequest(@NotNull HttpServletRequest request) {
-        return null;
-    }
+   @Nullable
+   @Override
+   public Router onRequest(@NotNull HttpServletRequest request) {
+      return null;
+   }
 
-    @Nullable
-    @Override
-    public BaseView onException(@NotNull Throwable e) {
-        Mvc.getLogger().error("未知异常", e.getMessage(), e);
-        return null;
-    }
+   @Nullable
+   @Override
+   public BaseView onException(@NotNull Throwable e) {
+      Mvc.getLogger().error("未知异常", e.getMessage(), e);
+      return null;
+   }
 }

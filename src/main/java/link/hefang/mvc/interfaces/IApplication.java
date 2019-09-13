@@ -14,17 +14,17 @@ import static link.hefang.helpers.CollectionHelper.arrayListOf;
 
 public interface IApplication {
 
-    @Nullable
-    default Collection<String> trustServerHost() {
-        return arrayListOf();
-    }
+   @Nullable
+   default Collection<String> trustServerHost() {
+      return arrayListOf();
+   }
 
-    @NotNull
-    Map<String, Object> onInit(@Nullable ServletConfig config);
+   @NotNull
+   Map<String, Object> onInit(@Nullable ServletConfig config);
 
-    @Nullable
-    Router onRequest(@NotNull HttpServletRequest request);
+   @Nullable
+   Router onRequest(@NotNull HttpServletRequest request);
 
-    @Nullable
-    BaseView onException(@NotNull Throwable e);
+   @Nullable
+   BaseView onException(@NotNull Throwable e);
 }

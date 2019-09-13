@@ -10,24 +10,24 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})
 public @interface Action {
-    /**
-     * 动作名称
-     *
-     * @return 动作名称
-     */
-    String value() default "";
+   /**
+    * 动作名称
+    *
+    * @return 动作名称
+    */
+   String value() default "";
 
-    /**
-     * 该方法是否是一个动作
-     *
-     * @return 是否是一个动作
-     */
-    boolean isAction() default true;
+   /**
+    * 该方法是否是一个动作
+    *
+    * @return 是否是一个动作
+    */
+   boolean isAction() default true;
 
-    /**
-     * 该动作可接受的请求方式
-     *
-     * @return 请求方式
-     */
-    RequestMethod method() default RequestMethod.GET;
+   /**
+    * 该动作可接受的请求方式
+    *
+    * @return 请求方式
+    */
+   RequestMethod method() default RequestMethod.GET;
 }
